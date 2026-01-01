@@ -64,24 +64,27 @@
             {{ $loans->links() }}
         </div>
 
-        <div style="text-align: center; margin-top: 40px;">
-            <a href="{{ route('reports.index') }}" class="btn-login" style="
-            padding: 18px 50px;
-            font-size: 20px;
-            flex: 1;
-            max-width: 300px;
-            background: rgba(255,255,255,0.15);
-            color: var(--primary);
-            border: 2px solid var(--primary);
-            border-radius: 12px;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: all 0.2s;
-        ">
-                        <i class="fas fa-arrow-left"></i> Volver a Reportes Generales
+        <div style="text-align: center; margin-top: 50px;">
+            <a href="{{ route('reports.index') }}" style="
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 12px;
+                padding: 12px 32px;
+                font-size: 16px;
+                font-weight: 600;
+                background: rgba(255, 102, 0, 0.15);
+                color: var(--primary);
+                border: 2px solid var(--primary);
+                border-radius: 50px;
+                text-decoration: none;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 15px rgba(255, 102, 0, 0.2);
+            "
+            onmouseover="this.style.background='var(--primary)'; this.style.color='white'; this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(255,102,0,0.4)';"
+            onmouseout="this.style.background='rgba(255, 102, 0, 0.15)'; this.style.color='var(--primary)'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(255,102,0,0.2)';">
+                <i class="fas fa-arrow-left"></i>
+                Volver a Reportes Generales
             </a>
         </div>
     </div>

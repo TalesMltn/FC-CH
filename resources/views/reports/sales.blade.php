@@ -60,24 +60,24 @@
             {{ $sales->links() }}
         </div>
 
-        <div style="text-align: center; margin-top: 40px;">
-            <a href="{{ route('reports.index') }}" class="btn-login" style="
-            padding: 18px 50px;
-            font-size: 20px;
-            flex: 1;
-            max-width: 300px;
-            background: rgba(255,255,255,0.15);
-            color: var(--primary);
-            border: 2px solid var(--primary);
-            border-radius: 12px;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: all 0.2s;
-        ">
-                        <i class="fas fa-arrow-left"></i> Volver a Reportes Generales
+        <div style="text-align: center; margin-top: 50px;">
+            <a href="{{ route('reports.index') }}" style="
+                display: inline-flex;
+                align-items: center;
+                gap: 10px;
+                padding: 12px 30px;
+                font-size: 16px;
+                background: rgba(255, 102, 0, 0.15);
+                color: var(--primary);
+                border: 2px solid var(--primary);
+                border-radius: 50px;
+                text-decoration: none;
+                font-weight: 600;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 15px rgba(255, 102, 0, 0.2);
+            " onmouseover="this.style.background='var(--primary)'; this.style.color='white';"
+               onmouseout="this.style.background='rgba(255, 102, 0, 0.15)'; this.style.color='var(--primary)';">
+                <i class="fas fa-arrow-left"></i> Volver a Reportes Generales
             </a>
         </div>
     </div>

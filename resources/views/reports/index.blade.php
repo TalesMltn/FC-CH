@@ -52,20 +52,107 @@
 
         <!-- Enlaces a reportes detallados -->
         <div style="text-align: center; margin-top: 50px;">
-            <h3 style="color: var(--primary); margin-bottom: 30px;">Reportes Detallados</h3>
-            <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
-                <a href="{{ route('reports.sales') }}" class="btn-login" style="padding: 20px 40px; font-size: 18px;">
-                    <i class="fas fa-file-invoice-dollar"></i> Ventas
+            <h3 style="color: var(--primary); margin-bottom: 30px; font-size: 28px; font-weight: 600;">
+                Reportes Detallados
+            </h3>
+            <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; max-width: 1200px; margin: 0 auto;">
+                
+                <a href="{{ route('reports.sales') }}" 
+                   style="
+                        padding: 18px 50px;
+                        font-size: 20px;
+                        flex: 1;
+                        max-width: 300px;
+                        background: rgba(255,255,255,0.15);
+                        color: var(--primary);
+                        border: 2px solid var(--primary);
+                        border-radius: 12px;
+                        text-decoration: none;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 12px;
+                        transition: all 0.3s ease;
+                        font-weight: 500;
+                   "
+                   onmouseover="this.style.background='rgba(255,255,255,0.25)'; this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.1)'"
+                   onmouseout="this.style.background='rgba(255,255,255,0.15)'; this.style.transform='none'; this.style.boxShadow='none'">
+                    <i class="fas fa-file-invoice-dollar" style="font-size: 24px;"></i>
+                    Ventas
                 </a>
-                <a href="{{ route('reports.payments') }}" class="btn-login" style="padding: 20px 40px; font-size: 18px;">
-                    <i class="fas fa-money-bill-wave"></i> Cobros
+        
+                <a href="{{ route('reports.payments') }}" 
+                   style="
+                        padding: 18px 50px;
+                        font-size: 20px;
+                        flex: 1;
+                        max-width: 300px;
+                        background: rgba(255,255,255,0.15);
+                        color: var(--primary);
+                        border: 2px solid var(--primary);
+                        border-radius: 12px;
+                        text-decoration: none;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 12px;
+                        transition: all 0.3s ease;
+                        font-weight: 500;
+                   "
+                   onmouseover="this.style.background='rgba(255,255,255,0.25)'; this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.1)'"
+                   onmouseout="this.style.background='rgba(255,255,255,0.15)'; this.style.transform='none'; this.style.boxShadow='none'">
+                    <i class="fas fa-money-bill-wave" style="font-size: 24px;"></i>
+                    Cobros
                 </a>
-                <a href="{{ route('reports.payroll') }}" class="btn-login" style="padding: 20px 40px; font-size: 18px;">
-                    <i class="fas fa-users-cog"></i> Nómina
+        
+                <a href="{{ route('reports.payroll') }}" 
+                   style="
+                        padding: 18px 50px;
+                        font-size: 20px;
+                        flex: 1;
+                        max-width: 300px;
+                        background: rgba(255,255,255,0.15);
+                        color: var(--primary);
+                        border: 2px solid var(--primary);
+                        border-radius: 12px;
+                        text-decoration: none;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 12px;
+                        transition: all 0.3s ease;
+                        font-weight: 500;
+                   "
+                   onmouseover="this.style.background='rgba(255,255,255,0.25)'; this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.1)'"
+                   onmouseout="this.style.background='rgba(255,255,255,0.15)'; this.style.transform='none'; this.style.boxShadow='none'">
+                    <i class="fas fa-users-cog" style="font-size: 24px;"></i>
+                    Nómina
                 </a>
-                <a href="{{ route('reports.loans') }}" class="btn-login" style="padding: 20px 40px; font-size: 18px;">
-                    <i class="fas fa-hand-holding-usd"></i> Préstamos
+        
+                <a href="{{ route('reports.loans') }}" 
+                   style="
+                        padding: 18px 50px;
+                        font-size: 20px;
+                        flex: 1;
+                        max-width: 300px;
+                        background: rgba(255,255,255,0.15);
+                        color: var(--primary);
+                        border: 2px solid var(--primary);
+                        border-radius: 12px;
+                        text-decoration: none;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 12px;
+                        transition: all 0.3s ease;
+                        font-weight: 500;
+                   "
+                   onmouseover="this.style.background='rgba(255,255,255,0.25)'; this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 20px rgba(0,0,0,0.1)'"
+                   onmouseout="this.style.background='rgba(255,255,255,0.15)'; this.style.transform='none'; this.style.boxShadow='none'">
+                    <i class="fas fa-hand-holding-usd" style="font-size: 24px;"></i>
+                    Préstamos
                 </a>
+        
             </div>
         </div>
     </div>
