@@ -160,30 +160,50 @@
             <a href="{{ route('home') }}" class="menu-item {{ request()->is('home') ? 'active' : '' }}">
                 <i class="fas fa-home"></i><span>Dashboard</span>
             </a>
-            <a href="/categories" class="menu-item">
+            <a href="/categories" class="menu-item {{ request()->is('categories*') ? 'active' : '' }}">
                 <i class="fas fa-tags"></i><span>Categorías</span>
             </a>
-            <a href="/persons" class="menu-item">
+            <a href="/persons" class="menu-item {{ request()->is('persons*') ? 'active' : '' }}">
                 <i class="fas fa-users"></i><span>Personas</span>
             </a>
-            <a href="/contracts" class="menu-item">
+            <a href="/contracts" class="menu-item {{ request()->is('contracts*') ? 'active' : '' }}">
                 <i class="fas fa-file-contract"></i><span>Contratos</span>
             </a>
-            <a href="/transactions" class="menu-item">
+            <a href="/transactions" class="menu-item {{ request()->is('transactions*') ? 'active' : '' }}">
                 <i class="fas fa-exchange-alt"></i><span>Transacciones</span>
             </a>
-            <a href="/payrolls" class="menu-item">
+            <a href="/payrolls" class="menu-item {{ request()->is('payrolls*') ? 'active' : '' }}">
                 <i class="fas fa-money-check-alt"></i><span>Nómina</span>
             </a>
-            <a href="/loans" class="menu-item">
+            <a href="/loans" class="menu-item {{ request()->is('loans*') ? 'active' : '' }}">
                 <i class="fas fa-hand-holding-usd"></i><span>Préstamos</span>
             </a>
-            <a href="/reports" class="menu-item">
-                <i class="fas fa-chart-bar"></i><span>Reportes</span>
+
+            <!-- REPORTES -->
+            <a href="{{ route('reports.index') }}" class="menu-item {{ request()->is('reports*') ? 'active' : '' }}">
+                <i class="fas fa-chart-pie"></i><span>Reportes Generales</span>
             </a>
-            <a href="/exports" class="menu-item">
+            <a href="{{ route('reports.sales') }}" class="menu-item {{ request()->is('reports/sales') ? 'active' : '' }}">
+                <i class="fas fa-file-invoice-dollar"></i><span>Reporte de Ventas</span>
+            </a>
+            <a href="{{ route('reports.payments') }}" class="menu-item {{ request()->is('reports/payments') ? 'active' : '' }}">
+                <i class="fas fa-money-bill-wave"></i><span>Reporte de Cobros</span>
+            </a>
+            <a href="{{ route('reports.payroll') }}" class="menu-item {{ request()->is('reports/payroll') ? 'active' : '' }}">
+                <i class="fas fa-users-cog"></i><span>Reporte de Nómina</span>
+            </a>
+            <a href="{{ route('reports.loans') }}" class="menu-item {{ request()->is('reports/loans') ? 'active' : '' }}">
+                <i class="fas fa-hand-holding-usd"></i><span>Reporte de Préstamos</span>
+            </a>
+
+            <a href="/exports" class="menu-item {{ request()->is('exports*') ? 'active' : '' }}">
                 <i class="fas fa-file-export"></i><span>Exportar</span>
             </a>
+
+            <a href="{{ route('exports.index') }}" class="menu-item {{ request()->is('exports*') ? 'active' : '' }}">
+                <i class="fas fa-file-export"></i><span>Exportar Reportes</span>
+            </a>
+
         </nav>
     </aside>
 
