@@ -20,8 +20,22 @@
                 </div>
 
                 <div>
-                    <label class="field-label" style="color: var(--primary);">Cliente *</label>
-                    <select name="person_id" required style="width: 100%; padding: 16px; border-radius: 15px; background: rgba(255,255,255,0.15); border: none; color: white; font-size: 16px;">
+                <label class="field-label" style="color: var(--primary); font-weight: bold;">Cliente *</label>
+                <select name="person_id" required style="
+                    width: 100%; 
+                    padding: 16px; 
+                    border-radius: 15px; 
+                    background: rgba(0,0,0,0.7); /* Fondo negro semi-transparente */
+                    border: none; 
+                    color: var(--primary); 
+                    font-size: 16px; 
+                    font-weight: bold; /* Texto de las opciones en negrita */
+                    appearance: none; 
+                    cursor: pointer; 
+                    background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27%23FF6B00%27%3e%3cpath d=%27M7 10l5 5 5-5z%27/%3e%3c/svg%3e'); 
+                    background-repeat: no-repeat; 
+                    background-position: right 16px center; 
+                    background-size: 16px;">
                         <option value="">Seleccione un cliente</option>
                         @foreach($clients as $client)
                             <option value="{{ $client->id }}" {{ old('person_id') == $client->id ? 'selected' : '' }}>
@@ -37,15 +51,39 @@
 
             <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px; margin-bottom: 30px;">
                 <div>
-                    <label class="field-label" style="color: var(--primary);">Tipo de Concreto *</label>
-                    <select name="category_id" id="category" required style="width: 100%; padding: 16px; border-radius: 15px; background: rgba(255,255,255,0.15); border: none; color: white; font-size: 16px;">
-                        <option value="">Seleccione categoría</option>
+                    <label class="field-label" style="color: var(--primary); font-weight: bold;">
+                        Tipo de Concreto *
+                    </label>
+                    
+                    <select name="category_id" id="category" required style="
+                        width: 100%; 
+                        padding: 16px; 
+                        border-radius: 15px; 
+                        background: rgba(0,0,0,0.7); /* Fondo negro semi-transparente */
+                        border: none; 
+                        color: var(--primary); 
+                        font-size: 16px; 
+                        font-weight: bold; /* Texto de las opciones en negrita */
+                        appearance: none; 
+                        cursor: pointer;
+                        background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27%23FF6B00%27%3e%3cpath d=%27M7 10l5 5 5-5z%27/%3e%3c/svg%3e');
+                        background-repeat: no-repeat;
+                        background-position: right 16px center;
+                        background-size: 16px;">
+                        
+                        <option value="" disabled {{ old('category_id') ? '' : 'selected' }} style="color: #aaa; font-weight: bold;">
+                            Seleccione categoría
+                        </option>
+                        
                         @foreach($categories as $category)
-                            <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                            <option value="{{ $category->id }}" 
+                                    {{ old('category_id') == $category->id ? 'selected' : '' }} 
+                                    style="font-weight: bold;">
                                 {{ $category->name }}
                             </option>
                         @endforeach
                     </select>
+                
                     @error('category_id')
                         <p style="color: #f66; margin-top: 8px; font-size: 14px;">{{ $message }}</p>
                     @enderror
@@ -97,14 +135,49 @@
             </div>
 
             <div style="margin-bottom: 30px;">
-                <label class="field-label" style="color: var(--primary);">Estado del Contrato *</label>
-                <select name="status" required style="width: 100%; padding: 16px; border-radius: 15px; background: rgba(255,255,255,0.15); border: none; color: white; font-size: 16px;">
-                    <option value="pendiente" {{ old('status', 'pendiente') == 'pendiente' ? 'selected' : '' }}>Pendiente</option>
-                    <option value="en_produccion" {{ old('status') == 'en_produccion' ? 'selected' : '' }}>En Producción</option>
-                    <option value="entregado" {{ old('status') == 'entregado' ? 'selected' : '' }}>Entregado</option>
-                    <option value="pagado" {{ old('status') == 'pagado' ? 'selected' : '' }}>Pagado</option>
-                    <option value="cancelado" {{ old('status') == 'cancelado' ? 'selected' : '' }}>Cancelado</option>
+                <label class="field-label" style="color: var(--primary); font-weight: bold;">
+                    Estado del Contrato *
+                </label>
+                
+                <select name="status" required style="
+                    width: 100%; 
+                    padding: 16px; 
+                    border-radius: 15px; 
+                    background: rgba(0,0,0,0.7); /* Fondo negro semi-transparente */
+                    border: none; 
+                    color: var(--primary); 
+                    font-size: 16px; 
+                    font-weight: bold; /* Opciones en negrita */
+                    appearance: none; 
+                    cursor: pointer;
+                    background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27%23FF6B00%27%3e%3cpath d=%27M7 10l5 5 5-5z%27/%3e%3c/svg%3e');
+                    background-repeat: no-repeat;
+                    background-position: right 16px center;
+                    background-size: 16px;">
+                    
+                    <option value="" disabled {{ old('status') ? '' : 'selected' }} style="color: #aaa; font-weight: bold;">
+                        Selecciona un estado
+                    </option>
+                    <option value="pendiente" {{ old('status', 'pendiente') == 'pendiente' ? 'selected' : '' }} style="font-weight: bold;">
+                        Pendiente
+                    </option>
+                    <option value="en_produccion" {{ old('status') == 'en_produccion' ? 'selected' : '' }} style="font-weight: bold;">
+                        En Producción
+                    </option>
+                    <option value="entregado" {{ old('status') == 'entregado' ? 'selected' : '' }} style="font-weight: bold;">
+                        Entregado
+                    </option>
+                    <option value="pagado" {{ old('status') == 'pagado' ? 'selected' : '' }} style="font-weight: bold;">
+                        Pagado
+                    </option>
+                    <option value="cancelado" {{ old('status') == 'cancelado' ? 'selected' : '' }} style="font-weight: bold;">
+                        Cancelado
+                    </option>
                 </select>
+            
+                @error('status')
+                    <p style="color: #f66; margin-top: 8px; font-size: 14px;">{{ $message }}</p>
+                @enderror
             </div>
 
             <div style="margin-bottom: 40px;">

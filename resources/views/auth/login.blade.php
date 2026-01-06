@@ -161,7 +161,7 @@
     
             <label class="field-label">Email</label>
             <div class="input-group">
-                <input type="email" name="email" placeholder="andreas@gmail.com" value="{{ old('email') }}" required autofocus>
+                <input type="email" name="email" placeholder="andrew@gmail.com" value="{{ old('email') }}" required autofocus>
             </div>
     
             <label class="field-label">Contraseña</label>
@@ -169,7 +169,7 @@
                 <input type="password" name="password" id="contrasena" placeholder="Ingresa tu contraseña" required>
                 <i class="fas fa-eye password-toggle" id="togglePassword"></i>
             </div>
-    
+            
             <button type="submit" class="btn-login">Ingresar</button>
         </form>
     </div>

@@ -14,8 +14,22 @@
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px;">
                 <div>
                     <label class="field-label" style="color: var(--primary);">Trabajador *</label>
-                    <select name="person_id" required style="width: 100%; padding: 16px; border-radius: 15px; background: rgba(255,255,255,0.15); border: none; color: white; font-size: 16px;">
-                        <option value="">Seleccione un trabajador</option>
+                    <select name="person_id" 
+                    required style="
+                    width: 100%; 
+                    padding: 16px; 
+                    border-radius: 15px; 
+                    background: rgba(0,0,0,0.7); /* Fondo negro semi-transparente */
+                    border: none; 
+                    color: var(--primary); 
+                    font-size: 16px; 
+                    font-weight: bold; /* Texto de las opciones en negrita */
+                    appearance: none; 
+                    cursor: pointer; 
+                    background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27%23FF6B00%27%3e%3cpath d=%27M7 10l5 5 5-5z%27/%3e%3c/svg%3e'); 
+                    background-repeat: no-repeat; 
+                    background-position: right 16px center; 
+                    background-size: 16px;"><option value="">Seleccione un trabajador</option>
                         @foreach($workers as $worker)
                             <option value="{{ $worker->id }}" {{ old('person_id') == $worker->id ? 'selected' : '' }}>
                                 {{ $worker->getFullNameAttribute() }} (DNI: {{ $worker->dni }})
@@ -47,17 +61,40 @@
                     @enderror
                 </div>
 
+                @php
+                \Carbon\Carbon::setLocale('es');
+                @endphp
+
                 <div>
                     <label class="field-label" style="color: var(--primary);">Mes *</label>
-                    <select name="month" required style="width: 100%; padding: 16px; border-radius: 15px; background: rgba(255,255,255,0.15); border: none; color: white; font-size: 16px;">
+
+                    <select name="month" required style="
+                        width: 100%;
+                        padding: 16px;
+                        border-radius: 15px;
+                        background: rgba(0,0,0,0.7);
+                        border: none;
+                        color: var(--primary);
+                        font-size: 16px;
+                        font-weight: bold;
+                        appearance: none;
+                        cursor: pointer;
+                        background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27%23FF6B00%27%3e%3cpath d=%27M7 10l5 5 5-5z%27/%3e%3c/svg%3e');
+                        background-repeat: no-repeat;
+                        background-position: right 16px center;
+                        background-size: 16px;
+                    ">
                         @for($m = 1; $m <= 12; $m++)
                             <option value="{{ $m }}" {{ old('month', now()->month) == $m ? 'selected' : '' }}>
-                                {{ \DateTime::createFromFormat('!m', $m)->format('F') }}
+                                {{ \Carbon\Carbon::create()->month($m)->translatedFormat('F') }}
                             </option>
                         @endfor
                     </select>
+
                     @error('month')
-                        <p style="color: #f66; margin-top: 8px; font-size: 14px;">{{ $message }}</p>
+                        <p style="color: #f66; margin-top: 8px; font-size: 14px;">
+                            {{ $message }}
+                        </p>
                     @enderror
                 </div>
             </div>
@@ -94,8 +131,21 @@
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px;">
                 <div>
                     <label class="field-label" style="color: var(--primary);">Método de Pago *</label>
-                    <select name="payment_method" required style="width: 100%; padding: 16px; border-radius: 15px; background: rgba(255,255,255,0.15); border: none; color: white; font-size: 16px;">
-                        <option value="efectivo" {{ old('payment_method') == 'efectivo' ? 'selected' : '' }}>Efectivo</option>
+                    <select name="payment_method" required style="
+                    width: 100%; 
+                    padding: 16px; 
+                    border-radius: 15px; 
+                    background: rgba(0,0,0,0.7); /* Fondo negro semi-transparente */
+                    border: none; 
+                    color: var(--primary); 
+                    font-size: 16px; 
+                    font-weight: bold; /* Texto de las opciones en negrita */
+                    appearance: none; 
+                    cursor: pointer; 
+                    background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27%23FF6B00%27%3e%3cpath d=%27M7 10l5 5 5-5z%27/%3e%3c/svg%3e'); 
+                    background-repeat: no-repeat; 
+                    background-position: right 16px center; 
+                    background-size: 16px;"><option value="efectivo" {{ old('payment_method') == 'efectivo' ? 'selected' : '' }}>Efectivo</option>
                         <option value="transferencia" {{ old('payment_method') == 'transferencia' ? 'selected' : '' }}>Transferencia</option>
                         <option value="yape" {{ old('payment_method') == 'yape' ? 'selected' : '' }}>Yape</option>
                         <option value="plin" {{ old('payment_method') == 'plin' ? 'selected' : '' }}>Plin</option>

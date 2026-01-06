@@ -30,11 +30,22 @@
                 @enderror
             </div>
 
+            <!-- Checkbox activo - CORREGIDO -->
             <div style="margin-bottom: 40px;">
+                <input type="hidden" name="active" value="0">
+
                 <label style="display: flex; align-items: center; color: var(--text-light); font-size: 16px;">
-                    <input type="checkbox" name="active" value="1" {{ $category->active ? 'checked' : '' }} style="margin-right: 12px; transform: scale(1.5);">
+                    <input type="checkbox" 
+                           name="active" 
+                           value="1" 
+                           {{ old('active', $category->active) ? 'checked' : '' }}
+                           style="margin-right: 12px; transform: scale(1.5); width: 20px; height: 20px;">
                     <span style="color: var(--primary);">Categoría activa</span> (desmarcar para desactivar)
                 </label>
+                
+                @error('active')
+                    <p style="color: #f66; margin-top: 8px; font-size: 14px;">{{ $message }}</p>
+                @enderror
             </div>
 
             <div style="text-align: center;">
@@ -44,8 +55,23 @@
             </div>
 
             <div style="text-align: center; margin-top: 20px;">
-                <a href="{{ route('categories.index') }}" style="color: var(--text-light); text-decoration: underline;">
-                    <i class="fas fa-arrow-left"></i> Volver a la lista
+                <a href="{{ route('categories.index') }}" style="
+                padding: 18px 50px;
+                font-size: 20px;
+                flex: 1;
+                max-width: 300px;
+                background: rgba(255,255,255,0.15);
+                color: var(--primary);
+                border: 2px solid var(--primary);
+                border-radius: 12px;
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                transition: all 0.2s;
+            ">
+                            <i class="fas fa-arrow-left"></i> Volver a la lista
                 </a>
             </div>
         </form>

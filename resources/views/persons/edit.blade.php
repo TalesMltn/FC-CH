@@ -27,33 +27,45 @@
 
                 <!-- Tipo de Persona -->
                 <div>
-                    <label class="field-label" style="color: var(--primary);">Tipo de Persona *</label>
+                    <label class="field-label" style="color: var(--primary); font-weight: bold;">Tipo de Persona *</label>
                     <select name="type" required style="
                         width: 100%; 
                         padding: 16px; 
                         border-radius: 15px; 
-                        background: rgba(255,255,255,0.15); 
+                        background: rgba(0,0,0,0.7); /* Fondo negro semi-transparente */
                         border: none; 
                         color: var(--primary); 
                         font-size: 16px; 
+                        font-weight: bold; /* Texto de las opciones en negrita */
                         appearance: none; 
-                        cursor: pointer;
-                        background-image: url(\"data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FF6B00'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e\");
-                        background-repeat: no-repeat;
-                        background-position: right 16px center;
-                        background-size: 16px;
-                    ">
-                        <option value="cliente" {{ old('type', $person->type) == 'cliente' ? 'selected' : '' }}>Cliente</option>
-                        <option value="trabajador" {{ old('type', $person->type) == 'trabajador' ? 'selected' : '' }}>Trabajador</option>
-                        <option value="proveedor" {{ old('type', $person->type) == 'proveedor' ? 'selected' : '' }}>Proveedor</option>
-                        <option value="otro" {{ old('type', $person->type) == 'otro' ? 'selected' : '' }}>Otro</option>
+                        cursor: pointer; 
+                        background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27%23FF6B00%27%3e%3cpath d=%27M7 10l5 5 5-5z%27/%3e%3c/svg%3e'); 
+                        background-repeat: no-repeat; 
+                        background-position: right 16px center; 
+                        background-size: 16px;">
+                        
+                        <option value="" disabled {{ old('type') ? '' : 'selected' }} style="color: #aaa; font-weight: bold;">
+                            Selecciona un tipo
+                        </option>
+                        <option value="cliente" {{ old('type') == 'cliente' ? 'selected' : '' }} style="font-weight: bold;">
+                            Cliente
+                        </option>
+                        <option value="trabajador" {{ old('type') == 'trabajador' ? 'selected' : '' }} style="font-weight: bold;">
+                            Trabajador
+                        </option>
+                        <option value="proveedor" {{ old('type') == 'proveedor' ? 'selected' : '' }} style="font-weight: bold;">
+                            Proveedor
+                        </option>
+                        <option value="otro" {{ old('type') == 'otro' ? 'selected' : '' }} style="font-weight: bold;">
+                            Otro
+                        </option>
                     </select>
                     @error('type')
                         <p style="color: #f66; margin-top: 8px; font-size: 14px;">{{ $message }}</p>
                     @enderror
                 </div>
             </div>
-
+    
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px;">
                 <!-- Nombres -->
                 <div>

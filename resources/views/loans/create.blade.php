@@ -14,8 +14,21 @@
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px;">
                 <div>
                     <label class="field-label" style="color: var(--primary);">Trabajador *</label>
-                    <select name="person_id" required style="width: 100%; padding: 16px; border-radius: 15px; background: rgba(255,255,255,0.15); border: none; color: white; font-size: 16px;">
-                        <option value="">Seleccione un trabajador</option>
+                    <select name="person_id" required style="
+                    width: 100%; 
+                    padding: 16px; 
+                    border-radius: 15px; 
+                    background: rgba(0,0,0,0.7); /* Fondo negro semi-transparente */
+                    border: none; 
+                    color: var(--primary); 
+                    font-size: 16px; 
+                    font-weight: bold; /* Texto de las opciones en negrita */
+                    appearance: none; 
+                    cursor: pointer; 
+                    background-image: url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27%23FF6B00%27%3e%3cpath d=%27M7 10l5 5 5-5z%27/%3e%3c/svg%3e'); 
+                    background-repeat: no-repeat; 
+                    background-position: right 16px center; 
+                    background-size: 16px;"><option value="">Seleccione un trabajador</option>
                         @foreach($workers as $worker)
                             <option value="{{ $worker->id }}" {{ old('person_id') == $worker->id ? 'selected' : '' }}>
                                 {{ $worker->getFullNameAttribute() }} (DNI: {{ $worker->dni }})
