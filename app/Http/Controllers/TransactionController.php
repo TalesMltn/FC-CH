@@ -13,21 +13,24 @@ class TransactionController extends Controller
         $search = $request->get('search');
 
         $transactions = Transaction::with('contract.person')
+            ->with(['contract' => function ($query) {
+                $query->withSum('transactions as total_pagado', 'amount');
+            }])
             ->when($search, function ($query, $search) {
-                return $query->whereHas('contract', function ($q) use ($search) {
-                    $q->where('code', 'like', '%' . $search . '%');
-                })->orWhere('reference', 'like', '%' . $search . '%');
+                $query->whereHas('contract', fn($q) => $q->where('code', 'like', "%{$search}%"))
+                      ->orWhere('reference', 'like', "%{$search}%");
             })
             ->orderBy('date', 'desc')
             ->orderBy('created_at', 'desc')
             ->paginate(12);
 
-        return view('transactions.index', compact('transactions', 'search'));
+        return view('transactions.index', compact('transactions'));
     }
 
     public function create()
     {
         $contracts = Contract::with('person')
+            ->withSum('transactions as total_pagado', 'amount')
             ->where('status', '!=', 'cancelado')
             ->where('status', '!=', 'pagado')
             ->orderBy('code', 'desc')
@@ -47,7 +50,9 @@ class TransactionController extends Controller
             'notes' => 'nullable|string',
         ]);
 
-        Transaction::create($request->all());
+        $transaction = Transaction::create($request->all());
+
+        $this->actualizarEstadoContrato($transaction->contract_id);
 
         return redirect()->route('transactions.index')
             ->with('success', 'Transacción registrada correctamente');
@@ -55,8 +60,9 @@ class TransactionController extends Controller
 
     public function edit(Transaction $transaction)
     {
-        $contracts = Contract::with('person')->orderBy('code', 'desc')->get();
-
+        // Cargar todos los contratos activos (o los que quieras mostrar)
+        $contracts = Contract::orderBy('code')->get(); // Ajusta según tus necesidades
+    
         return view('transactions.edit', compact('transaction', 'contracts'));
     }
 
@@ -73,15 +79,39 @@ class TransactionController extends Controller
 
         $transaction->update($request->all());
 
+        $this->actualizarEstadoContrato($transaction->contract_id);
+
         return redirect()->route('transactions.index')
             ->with('success', 'Transacción actualizada correctamente');
     }
 
     public function destroy(Transaction $transaction)
     {
+        $contratoId = $transaction->contract_id;
+
         $transaction->delete();
+
+        $this->actualizarEstadoContrato($contratoId);
 
         return redirect()->route('transactions.index')
             ->with('success', 'Transacción eliminada correctamente');
+    }
+
+    private function actualizarEstadoContrato($contractId)
+    {
+        $contract = Contract::findOrFail($contractId);
+
+        $totalPagado = $contract->transactions()->sum('amount');
+        $saldoPendiente = $contract->total - $totalPagado;
+
+        if ($saldoPendiente <= 0) {
+            $contract->status = 'pagado';
+        } else {
+            if ($contract->status === 'pagado') {
+                $contract->status = 'pendiente';
+            }
+        }
+
+        $contract->save();
     }
 }

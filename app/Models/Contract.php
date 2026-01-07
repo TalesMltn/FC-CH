@@ -60,4 +60,8 @@ class Contract extends Model
         $number = $last ? (int)substr($last->code, 5) + 1 : 1;
         return 'CONT-' . str_pad($number, 3, '0', STR_PAD_LEFT);
     }
+    public function transactions()
+{
+    return $this->hasMany(Transaction::class);
+}
 }

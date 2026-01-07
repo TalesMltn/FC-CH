@@ -8,7 +8,7 @@
             Registrar Nuevo Préstamo a Trabajador
         </h2>
 
-        <form method="POST" action="{{ route('loans.store') }}">
+        <form method="POST" action="{{ route('loans.store') }}">    
             @csrf
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px;">
