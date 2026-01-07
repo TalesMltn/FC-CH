@@ -5,18 +5,20 @@
 @section('content')
     <div class="card" style="background: var(--dark-light); border-radius: 15px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
         <div class="header-table" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 20px;">
-            <h2 style="color: var(--primary); font-size: 32px;">Registro de Pagos y Transacciones</h2>
+            <h2 style="color: var(--primary); font-size: 32px; margin: 0;">Registro de Pagos y Transacciones</h2>
             <a href="{{ route('transactions.create') }}" class="btn-login" style="
                 display: inline-flex;
                 align-items: center;
                 gap: 8px;
                 padding: 12px 25px;
-                background-color: var(--primary);
+                background: var(--primary);
                 color: white;
-                border-radius: 6px;
+                border-radius: 8px;
                 text-decoration: none;
-                font-weight: 500;
-                white-space: nowrap;
+                font-weight: 600;
+                font-size: 16px;
+                transition: all 0.3s;
+                box-shadow: 0 4px 15px rgba(255,107,0,0.3);
             ">
                 <i class="fas fa-plus"></i> Nueva Transacción
             </a>
@@ -24,119 +26,134 @@
 
         <!-- Búsqueda -->
         <form method="GET" action="{{ route('transactions.index') }}" style="margin-bottom: 30px;">
-            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                <input type="text" name="search" value="{{ request('search') }}" placeholder="Buscar por código de contrato o referencia..." 
-                       style="flex: 1; min-width: 250px; padding: 14px; border-radius: 15px; background: rgba(255,255,255,0.1); border: none; color: white; font-size: 16px;">
+            <div style="display: flex; gap: 15px; flex-wrap: wrap; align-items: center;">
+                <input type="text" name="search" value="{{ request('search') }}" 
+                       placeholder="Buscar por código de contrato o referencia..." 
+                       style="flex: 1; min-width: 280px; padding: 14px 18px; border-radius: 15px; background: rgba(255,255,255,0.1); border: none; color: white; font-size: 16px;">
 
-                <button type="submit" class="btn-login" style="padding: 14px 25px;">
+                <button type="submit" class="btn-login" style="padding: 14px 28px; border-radius: 12px;">
                     <i class="fas fa-search"></i> Buscar
                 </button>
 
                 @if(request('search'))
-                    <a href="{{ route('transactions.index') }}" class="btn-login" style="background: #666; padding: 14px 20px;">
+                    <a href="{{ route('transactions.index') }}" class="btn-login" style="background: #555; padding: 14px 24px; border-radius: 12px; color: white;">
                         <i class="fas fa-times"></i> Limpiar
                     </a>
                 @endif
             </div>
         </form>
 
+        <!-- Mensaje de éxito -->
         @if(session('success'))
-            <div style="background: rgba(0, 200, 0, 0.2); color: #0f0; padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #0f0;">
+            <div style="background: rgba(0, 200, 0, 0.25); color: #0f0; padding: 16px; border-radius: 12px; margin-bottom: 24px; border-left: 5px solid #0f0; font-weight: 600;">
                 {{ session('success') }}
             </div>
         @endif
 
-        <div style="overflow-x: auto;">
-            <table style="width: 100%; border-collapse: collapse;">
+        <!-- Tabla -->
+        <div style="overflow-x: auto; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+            <table style="width: 100%; border-collapse: separate; border-spacing: 0;">
                 <thead>
-                    <tr style="background: var(--gray);">
-                        <th style="padding: 15px; text-align: left; color: var(--primary);">Fecha</th>
-                        <th style="padding: 15px; text-align: left; color: var(--primary);">Contrato</th>
-                        <th style="padding: 15px; text-align: left; color: var(--primary);">Cliente</th>
-                        <th style="padding: 15px; text-align: left; color: var(--primary);">Detalle de Pago y Saldo</th>
-                        <th style="padding: 15px; text-align: left; color: var(--primary);">Método</th>
-                        <th style="padding: 15px; text-align: left; color: var(--primary);">Referencia</th>
-                        <th style="padding: 15px; text-align: center; color: var(--primary);">Acciones</th>
+                    <tr style="background: rgba(255,102,0,0.15);">
+                        <th style="padding: 16px; text-align: left; color: var(--primary); font-weight: 700; font-size: 15px;">Fecha</th>
+                        <th style="padding: 16px; text-align: left; color: var(--primary); font-weight: 700; font-size: 15px;">Contrato</th>
+                        <th style="padding: 16px; text-align: left; color: var(--primary); font-weight: 700; font-size: 15px;">Cliente</th>
+                        <th style="padding: 16px; text-align: center; color: var(--primary); font-weight: 700; font-size: 15px;">Detalle de Pago y Saldo</th>
+                        <th style="padding: 16px; text-align: left; color: var(--primary); font-weight: 700; font-size: 15px;">Método</th>
+                        <th style="padding: 16px; text-align: left; color: var(--primary); font-weight: 700; font-size: 15px;">Referencia</th>
+                        <th style="padding: 16px; text-align: center; color: var(--primary); font-weight: 700; font-size: 15px;">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse($transactions as $transaction)
-                        <tr style="border-bottom: 1px solid rgba(255,102,0,0.2);">
-                            <td style="padding: 15px; color: var(--text-light);">{{ $transaction->date->format('d/m/Y') }}</td>
-                            <td style="padding: 15px; color: white; font-weight: 600;">{{ $transaction->contract->code }}</td>
-                            <td style="padding: 15px; color: var(--text-light);">{{ $transaction->contract->person->getFullNameAttribute() }}</td>
+                        <tr style="border-bottom: 1px solid rgba(255,102,0,0.15); transition: background 0.3s;">
+                            <td style="padding: 16px; color: var(--text-light); font-size: 15px;">{{ $transaction->date->format('d/m/Y') }}</td>
+                            <td style="padding: 16px; color: white; font-weight: 700; font-size: 16px;">{{ $transaction->contract->code }}</td>
+                            <td style="padding: 16px; color: var(--text-light); font-size: 15px;">{{ $transaction->contract->person->getFullNameAttribute() }}</td>
 
-                            <!-- DETALLE DE PAGO Y SALDO - VERSIÓN FINAL Y MEJORADA -->
-                            <td style="padding: 35px 15px; text-align: center; line-height: 2.6; background: rgba(255,102,0,0.05); border-radius: 15px;">
+                            <!-- DETALLE DE PAGO Y SALDO - CÁLCULO CORREGIDO Y FORMATO INTACTO -->
+                            <td style="padding: 12px; text-align: center;">
                                 @php
-                                    $totalContrato = $transaction->contract->total ?? 0;
-                                    $totalPagado   = $transaction->contract->total_pagado ?? 0;
-                                    $pagadoAntes   = $totalPagado - $transaction->amount;
-                                    $debiaAntes    = $totalContrato - $pagadoAntes;
-                                    $saldoFinal    = $debiaAntes - $transaction->amount;
+                                    // Carga fresca del contrato (evita caché malo)
+                                    $contract = App\Models\Contract::find($transaction->contract_id);
+
+                                    // Suma SOLO pagos ANTERIORES (excluye el actual)
+                                    $pagadoAntes = $contract->transactions()
+                                        ->where('id', '!=', $transaction->id)  // excluye el pago actual
+                                        ->where(function($query) use ($transaction) {
+                                            $query->where('date', '<', $transaction->date)
+                                                  ->orWhere(function($q) use ($transaction) {
+                                                      $q->where('date', '=', $transaction->date)
+                                                        ->where('id', '<', $transaction->id);
+                                                  });
+                                        })
+                                        ->where('amount', '>', 0)
+                                        ->sum('amount');
+
+                                    $debiaAntes = (float)$contract->total - (float)$pagadoAntes;
+                                    $saldoFinal = max(0, $debiaAntes - (float)$transaction->amount);
                                 @endphp
 
-                                <!-- Lo que debía antes -->
-                                <div style="color: #ff9; font-size: 34px; font-weight: 700;">
-                                    {{ number_format($debiaAntes, 2) }}
-                                </div>
+                                <div style="display: inline-flex; align-items: center; gap: 10px; padding: 8px 12px; background: rgba(255,102,0,0.08); border-radius: 10px;">
+                                    <span style="color: #ffcc66; font-weight: 700;">S/ {{ number_format($debiaAntes, 2) }}</span>
+                                    <span style="color: #aaa; font-size: 14px;">−</span>
+                                    <span style="color: #22c55e; font-weight: 700;">S/ {{ number_format($transaction->amount, 2) }}</span>
+                                    <span style="color: #aaa; font-size: 14px;">=</span>
+                                    <span style="color: white; font-weight: 800; font-size: 16px;">S/ {{ number_format($saldoFinal, 2) }}</span>
 
-                                <!-- Pago realizado -->
-                                <div style="color: #0f0; font-size: 30px; margin: 20px 0;">
-                                    – {{ number_format($transaction->amount, 2) }}
+                                    <span style="
+                                        font-size: 11px;
+                                        padding: 4px 10px;
+                                        border-radius: 20px;
+                                        font-weight: 700;
+                                        background: {{ $saldoFinal <= 0 ? 'rgba(34,197,94,0.3)' : 'rgba(255,204,102,0.3)' }};
+                                        color: {{ $saldoFinal <= 0 ? '#22c55e' : '#ffcc66' }};
+                                    ">
+                                        {{ $saldoFinal <= 0 ? 'Pagado' : 'Pendiente' }}
+                                    </span>
                                 </div>
-
-                                <!-- Resultado -->
-                                <div style="font-size: 40px; font-weight: 700; color: #fff; text-shadow: 0 0 25px #ff9;">
-                                    = {{ number_format(max(0, $saldoFinal), 2) }}
-                                </div>
-
-                                <!-- Mensaje final -->
-                                @if($saldoFinal <= 0)
-                                    <div style="color: #0f0; font-size: 22px; margin-top: 25px; font-weight: bold;">
-                                        ¡Contrato pagado completo! 🎉
-                                    </div>
-                                @else
-                                    <div style="color: #ff9; font-size: 22px; margin-top: 25px; font-weight: bold;">
-                                        Saldo pendiente: S/ {{ number_format(max(0, $saldoFinal), 2) }}
-                                    </div>
-                                @endif
                             </td>
 
-                            <!-- Método de pago -->
-                            <td style="padding: 15px;">
-                                <span style="padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; background: rgba(255,255,255,0.1);">
+                            <!-- Método de pago con íconos -->
+                            <td style="padding: 16px;">
+                                <span style="padding: 8px 14px; border-radius: 20px; font-size: 13px; font-weight: 700; background: rgba(255,255,255,0.12); display: inline-flex; align-items: center; gap: 8px;">
                                     @switch($transaction->payment_method)
-                                        @case('efectivo') <i class="fas fa-money-bill-wave" style="color: #0f0;"></i> Efectivo @break
+                                        @case('efectivo') <i class="fas fa-money-bill-wave" style="color: #0f8;"></i> Efectivo @break
                                         @case('transferencia') <i class="fas fa-university" style="color: #66f;"></i> Transferencia @break
-                                        @case('yape') <i class="fas fa-mobile-alt" style="color: #9f3;"></i> Yape @break
-                                        @case('plin') <i class="fas fa-mobile-alt" style="color: #f39;"></i> Plin @break
+                                        @case('yape') <i class="fas fa-mobile-alt" style="color: #a0f;"></i> Yape @break
+                                        @case('plin') <i class="fas fa-mobile-alt" style="color: #f6a;"></i> Plin @break
                                         @case('tarjeta') <i class="fas fa-credit-card" style="color: #fc6;"></i> Tarjeta @break
-                                        @case('cheque') <i class="fas fa-file-invoice-dollar" style="color: #aaa;"></i> Cheque @break
-                                        @default <i class="fas fa-question" style="color: #ccc;"></i> Otro @break
+                                        @case('cheque') <i class="fas fa-file-invoice-dollar" style="color: #ccc;"></i> Cheque @break
+                                        @default <i class="fas fa-question-circle" style="color: #999;"></i> Otro @break
                                     @endswitch
                                 </span>
                             </td>
 
-                            <td style="padding: 15px; color: var(--text-light);">{{ $transaction->reference ?? 'Sin referencia' }}</td>
+                            <td style="padding: 16px; color: var(--text-light); font-size: 15px;">
+                                {{ $transaction->reference ?? '<em style="color:#666;">Sin referencia</em>' }}
+                            </td>
 
-                            <td style="padding: 15px; text-align: center;">
-                                <a href="{{ route('transactions.edit', $transaction) }}" style="color: var(--primary); margin: 0 10px;">
-                                    <i class="fas fa-edit fa-lg"></i>
-                                </a>
+                            <!-- Acciones -->
+                            <td style="padding: 16px; text-align: center;">
+                                <!-- Botón Editar comentado (como pediste) -->
+                                <!-- <a href="{{ route('transactions.edit', $transaction) }}" title="Editar" style="color: var(--primary); margin: 0 12px; font-size: 18px;">
+                                    <i class="fas fa-edit"></i>
+                                </a> -->
+
                                 <form action="{{ route('transactions.destroy', $transaction) }}" method="POST" style="display: inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" style="background: none; border: none; color: #f66; cursor: pointer;" 
-                                            onclick="return confirm('¿Seguro que quieres eliminar esta transacción?')">
-                                        <i class="fas fa-trash fa-lg"></i>
+                                    <button type="submit" title="Eliminar" style="background: none; border: none; color: #f66; cursor: pointer; font-size: 18px;" 
+                                            onclick="return confirm('¿Seguro que deseas eliminar esta transacción? Esta acción no se puede deshacer.')">
+                                        <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </form>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" style="padding: 40px; text-align: center; color: var(--text-light); font-size: 18px;">
+                            <td colspan="7" style="padding: 60px; text-align: center; color: #888; font-size: 18px;">
+                                <i class="fas fa-receipt fa-3x mb-3" style="opacity: 0.3;"></i><br>
                                 No hay transacciones registradas aún.
                             </td>
                         </tr>
@@ -145,7 +162,8 @@
             </table>
         </div>
 
-        <div style="margin-top: 30px;">
+        <!-- Paginación -->
+        <div style="margin-top: 30px; text-align: center;">
             {{ $transactions->appends(request()->query())->links() }}
         </div>
     </div>
